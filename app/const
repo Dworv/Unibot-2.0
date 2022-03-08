@@ -1,13 +1,6 @@
 # rename to const.py when ready
-import os
 
 TOKEN = "token"
-EXTS = [
-    file.removesuffix('.py') 
-    for file 
-    in os.listdir("exts") 
-    if not file.startswith("_")
-]
 DATA = {
     'guild': 946574225194487879,
     'role': {
