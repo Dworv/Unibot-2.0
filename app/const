@@ -1,0 +1,25 @@
+# rename to const.py when ready
+import os
+
+TOKEN = "token"
+EXTS = [
+    file.removesuffix('.py') 
+    for file 
+    in os.listdir("exts") 
+    if not file.startswith("_")
+]
+DATA = {
+    'guild': 946574225194487879,
+    'role': {
+        'owner': 950647954467876874,
+        'reviewer': 950647896217354250,
+        'memberplus': 950648002786254888,
+        'member': 950648046042099743,
+        'trial': 950648079068049468
+    },
+    'channel': {
+        'commands': 950640896343437373,
+        'reviewing': 950640914483798026,
+        'reviews': 950640930824798208
+    }
+}

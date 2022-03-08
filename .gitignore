@@ -1,3 +1,7 @@
+# Extra Stuff
+*.code-workspace
+const.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
