@@ -1,6 +1,8 @@
 # rename to const.py when ready
 
 TOKEN = "token"
+AUTHORS = ['Dworv#0001']
+VERSION = 'ALPHA'
 DATA = {
     'guild': 946574225194487879,
     'role': {
@@ -14,5 +16,6 @@ DATA = {
         'commands': 950640896343437373,
         'reviewing': 950640914483798026,
         'reviews': 950640930824798208
-    }
+    },
+    'color': 0x570861
 }
