@@ -35,8 +35,9 @@ bot.load('interactions.ext.better_interactions')
     if not file.startswith("_")
 ]
 
+# on ready
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.me.name}.")
+    print(f"Bot is ready (logged in as {bot.me.name})")
 
 bot.start()
