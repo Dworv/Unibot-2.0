@@ -1,28 +1,28 @@
 
-import interactions as i
-from interactions.ext import better_interactions as b
+import interactions as inter
+from interactions.ext import enhanced
 
 import logging, os
 from const import *
 
 # logging.basicConfig(level=logging.DEBUG)
 
-bot = i.Client(
+bot = inter.Client(
     TOKEN,
-    presence=i.ClientPresence(
+    presence=inter.ClientPresence(
         activities=[
-            i.PresenceActivity(
+            inter.PresenceActivity(
                 name="International Editing",
                 url='https://www.youtube.com/c/universeediting',
-                type=i.PresenceActivityType.STREAMING
+                type=inter.PresenceActivityType.STREAMING
             ),
         ],
-        status=i.StatusType.IDLE,
+        status=inter.StatusType.IDLE,
     ),
 )
 
 # load global exts
-bot.load('interactions.ext.better_interactions')
+bot.load('interactions.ext.enhanced', debug_scope=DATA['guild'])
 
 # load local exts
 [

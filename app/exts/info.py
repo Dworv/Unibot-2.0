@@ -1,37 +1,37 @@
 
-import interactions as i
-from interactions.ext import better_interactions as b
+import interactions as inter
+from interactions.ext import enhanced
 
 import const
 
-class Info(i.Extension):
+class Info(enhanced.EnhancedExtension):
     """An extension dedicated to /info."""
 
-    @i.extension_command(scope=const.DATA["guild"])
-    async def info(self, ctx: i.CommandContext):
+    @inter.extension_command()
+    async def info(self, ctx: inter.CommandContext):
         """Get information about UniBot 2.0"""
 
-        embed = i.Embed(
+        embed = inter.Embed(
             title="UniBot 2.0",
             description="UniBot is a discord bot written in python using the `interactions.py` library.",
             color=const.DATA['color'],
             fields=[
-                i.EmbedField(
+                inter.EmbedField(
                     name='Development Start',
                     value='<t:1646890200:f>',
                     inline=True
                 ),
-                i.EmbedField(
+                inter.EmbedField(
                     name='Version',
                     value=const.VERSION,
                     inline=True
                 ),
-                i.EmbedField(
+                inter.EmbedField(
                     name='Authors',
                     value='\n'.join(const.AUTHORS),
                     inline=True
                 ),
-                i.EmbedField(
+                inter.EmbedField(
                     name='What is this for',
                     value="""
 UniBot 2.0, a bot written to replace the original UniBot written by G_bby, was built due to the Discord API v6 going EOL in April, 2022.
