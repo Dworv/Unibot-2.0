@@ -11,10 +11,12 @@ class Info(enhanced.EnhancedExtension):
     async def info(self, ctx: inter.CommandContext):
         """Get information about UniBot 2.0"""
 
+        print('info')
+
         embed = inter.Embed(
             title="UniBot 2.0",
             description="UniBot is a discord bot written in python using the `interactions.py` library.",
-            color=const.DATA['color'],
+            color=const.METADATA['color'],
             fields=[
                 inter.EmbedField(
                     name='Development Start',
