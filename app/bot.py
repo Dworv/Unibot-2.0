@@ -22,14 +22,13 @@ bot = inter.Client(
 )
 
 # load global exts
-bot.load('interactions.ext.enhanced', debug_scope=DATA['guild'])
+bot.load('interactions.ext.enhanced', debug_scope=METADATA['guild'])
 
 # load local exts
 [
     bot.load(
     f"exts.{file.removesuffix('.py')}"
     )
-
     for file 
     in os.listdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), "exts")) 
     if not file.startswith("_")

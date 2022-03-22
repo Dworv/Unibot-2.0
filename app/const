@@ -3,7 +3,7 @@
 TOKEN = "token"
 AUTHORS = ['Dworv#0001']
 VERSION = 'ALPHA'
-DATA = {
+METADATA = {
     'guild': 946574225194487879,
     'role': {
         'owner': 950647954467876874,
