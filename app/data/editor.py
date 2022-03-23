@@ -21,3 +21,17 @@ class Editor:
         data = next(res)
         self.con.commit()
         return data
+    
+    def edit_application(self, application_id, field, value):
+        self.cur.execute(
+            f'UPDATE applications SET {field} = ? WHERE application_id = ?',
+            (value, application_id)
+        )
+        self.con.commit()
+    
+    def edit_member(self, user_id, field, value):
+        self.cur.execute(
+            f'UPDATE members SET {field} = ? WHERE user_id = ?',
+            (value, user_id)
+        )
+        self.con.commit()

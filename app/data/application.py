@@ -11,4 +11,6 @@ class Application:
 
         self._editor = editor
     
-    
+    def update_status(self, status: int):
+        self._editor.edit_application(self.application_id, 'status', status)
+        self.status = status
