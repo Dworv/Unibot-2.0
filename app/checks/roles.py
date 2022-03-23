@@ -1,8 +1,18 @@
 
 import const
+from tools import build_response_embed
 
-def can_apply(ctx):
+async def can_apply(ctx):
     """
     Check if the user can apply.
     """
-    return const.METADATA['role']['member'] not in ctx.author.roles and const.METADATA['role']['memberples'] not in ctx.author.roles
+    if const.METADATA['role']['member'] in ctx.author.roles:
+        await ctx.send(embeds=build_response_embed('To apply for Member+, you need to ask the staff so they can promote you.'))
+        return False
+    if const.METADATA['role']['memberplus'] in ctx.author.roles:
+        await ctx.send(embeds=build_response_embed('You have already reached the highest level of editor.'))
+        return False
+    if const.METADATA['role']['reviewer'] in ctx.author.roles:
+        await ctx.send(embeds=build_response_embed('Reviewers are not allowed to apply'))
+        return False
+    return True
