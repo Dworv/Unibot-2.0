@@ -1,9 +1,9 @@
 
-import interactions as inter
-from interactions.ext import enhanced
-
 import logging, os
+import interactions as inter
+
 from const import *
+from data import Database
 
 # logging.basicConfig(level=logging.DEBUG)
 
@@ -20,6 +20,9 @@ bot = inter.Client(
         status=inter.StatusType.IDLE,
     ),
 )
+
+# add database to bot
+bot.database = Database()
 
 # load global exts
 bot.load('interactions.ext.enhanced', debug_scope=METADATA['guild'])
