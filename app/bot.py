@@ -26,7 +26,6 @@ bot.database = Database()
 
 # load global exts
 bot.load('interactions.ext.enhanced', debug_scope=METADATA['guild'])
-bot.load('interactions.ext.checks')
 
 # load local exts
 [
