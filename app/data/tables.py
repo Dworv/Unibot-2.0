@@ -9,11 +9,12 @@ CREATE TABLE IF NOT EXISTS "members" (
 '''.removeprefix('\n')
 
 applications_create = '''
-CREATE TABLE IF NOT EXISTS "applications" (
-    "application_id"	INTEGER NOT NULL,
-    "applicant_id"	INTEGER NOT NULL,
-    "review_msg_id"    INTEGER NOT NULL,
-    "status"	INTEGER NOT NULL,
-    "url"    TEXT NOT NULL
+CREATE TABLE "applications" (
+	"application_id"	INTEGER NOT NULL,
+	"applicant_id"	INTEGER NOT NULL,
+	"review_msg_id"	INTEGER NOT NULL,
+	"status"	INTEGER NOT NULL,
+	"url"	TEXT NOT NULL,
+	PRIMARY KEY("application_id" AUTOINCREMENT)
 )
 '''.removeprefix('\n')
