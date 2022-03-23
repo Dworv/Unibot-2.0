@@ -21,6 +21,8 @@ class Database:
 
     def get_member(self, user_id: int) -> Member:
         self.cur.execute('SELECT * FROM members WHERE user_id = ?', (user_id,))
+        if self.cur.fetchone() is None:
+            return None
         return Member(self.cur.fetchone(), self.editor)
 
     def new_application(self, applicant_id: int, review_msg_id: int, status: str, url: str) -> Application:
@@ -29,5 +31,7 @@ class Database:
     
     def get_application(self, application_id: int) -> Application:
         self.cur.execute('SELECT * FROM applications WHERE application_id = ?', (application_id,))
+        if self.cur.fetchone() is None:
+            return None
         return Application(self.cur.fetchone(), self.editor)
 
