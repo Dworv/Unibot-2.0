@@ -2,7 +2,7 @@
 import interactions as inter
 import const
 
-def build_response_embed(message, **infos):
+def build_embed(message, **infos):
     if infos:
         return inter.Embed(
             title=message,
