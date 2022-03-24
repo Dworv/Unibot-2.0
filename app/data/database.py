@@ -1,5 +1,5 @@
 
-import sqlite3, os
+import sqlite3, os, time
 from .tables import members_create, applications_create
 from .application import Application
 from .member import Member
@@ -15,6 +15,7 @@ class Database:
         self.cur.execute(members_create)
         self.cur.execute(applications_create)
 
+    # member methods
     def new_member(self, user_id: int, rank: str, name: str, youtube: str) -> Member:
         data = self.editor.create_member(user_id, rank, name, youtube)
         return Member(data, self.editor)
@@ -24,9 +25,17 @@ class Database:
         if self.cur.fetchone() is None:
             return None
         return Member(self.cur.fetchone(), self.editor)
+    
+    def search_members(self, field, value):
+        self.cur.execute(f'SELECT * FROM members WHERE {field} = ?', (value,))
+        return [Member(data, self.editor) for data in self.cur.fetchall()]
+    
+    class member_fields:
+        rank = 'rank'
 
+    # application methods
     def new_application(self, applicant_id: int, review_msg_id: int, status: str, url: str) -> Application:
-        data = self.editor.create_application(applicant_id, review_msg_id, status, url)
+        data = self.editor.create_application(applicant_id, review_msg_id, status, url, int(time.time()))
         return Application(data, self.editor)
     
     def get_application(self, application_id: int) -> Application:
@@ -34,4 +43,11 @@ class Database:
         if self.cur.fetchone() is None:
             return None
         return Application(self.cur.fetchone(), self.editor)
+    
+    def search_applications(self, field, value):
+        self.cur.execute(f'SELECT * FROM applications WHERE {field} = ?', (value,))
+        return [Application(data, self.editor) for data in self.cur.fetchall()]
 
+    class application_fields:
+        applicant_id = 'applicant_id'
+        status = 'status'

@@ -4,10 +4,10 @@ class Editor:
         self.con = con
         self.cur = cur
     
-    def create_application(self, applicant_id, review_msg_id, status, url):
+    def create_application(self, applicant_id, review_msg_id, status, url, date):
         res = self.cur.execute(
-            'INSERT INTO applications (applicant_id, review_msg_id, status, url) VALUES (?, ?, ?, ?) RETURNING *',
-            (applicant_id, review_msg_id, status, url)
+            'INSERT INTO applications (applicant_id, review_msg_id, status, url, date) VALUES (?, ?, ?, ?, ?) RETURNING *',
+            (applicant_id, review_msg_id, status, url, date)
         )
         data = next(res)
         self.con.commit()

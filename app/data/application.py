@@ -8,6 +8,7 @@ class Application:
         self.review_msg_id: int = int(data[2])
         self.status: int = int(data[3])
         self.url: str = data[4]
+        self.date: int = int(data[5])
 
         self._editor = editor
     

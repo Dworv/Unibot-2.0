@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS "applications" (
 	"review_msg_id"	INTEGER NOT NULL,
 	"status"	INTEGER NOT NULL,
 	"url"	TEXT NOT NULL,
+	"date"	INTEGER NOT NULL,
 	PRIMARY KEY("application_id" AUTOINCREMENT)
 )
 '''.removeprefix('\n')
