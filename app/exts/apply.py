@@ -26,7 +26,13 @@ class Apply(EnhancedExtension):
         applications = self.client.database.search_applications('applicant_id', int(ctx.author.id))
         for application in applications:
             if int(time()) - 604800 < application.date:
-                await ctx.send(embeds=build_embed(f'You have already applied within the last week. You can apply again <t:{application.date + 604800}:R>'))
+                await ctx.send(embeds=build_embed(
+                    f'You have already applied within the last week. You can apply again <t:{application.date + 604800}:R>',
+                    infos = {
+                        'Last Date': f'<f:{application.date}:F',
+                        'Last App': application.url
+                    }
+                ))
                 return
 
         # check if url is valid
@@ -35,16 +41,45 @@ class Apply(EnhancedExtension):
             return
 
         # send to reviewing channel
-        reviewing_msg = await ctx.send(build)
+        # TODO: change to bot.get
+        reviewing_channel = inter.Channel(**self.client._http.get_channel(const.METADATA['channel']['reviewing']))
+        reviewing_channel._client = self.client._http
+
+        has_trail = const.METADATA['role']['trial'] in ctx.author.roles
+
+        reviewing_msg = await reviewing_channel.send(
+            url, 
+            embeds=build_embed(
+                'New Application!',
+                infos = {
+                    'Rank:': 'Trial' if has_trail else 'None',
+                    'URL': url,
+                    'User': ctx.author.mention
+                }
+            ),
+            components=[# TODO: MAKE REVIEW SELECT MENU BY PUTTING NEW RANK IN CUSTOM_ID
+                inter.Button(
+                    custom_id='review_button',
+                    style=inter.ButtonStyle.SUCCESS,
+                    label='Review',
+                )
+            ]
+        )
 
         # add to database
+        self.client.database.new_application(
+            int(ctx.author.id), 
+            int(reviewing_msg.id), 
+            0, 
+            url
+        )
 
         # confirm application
         await ctx.send(embeds=build_embed(
             'Application successfully submitted.', 
-            URL = url,
+            URL=url,
         ))
-
+        
 
 def setup(bot):
     Apply(bot)
