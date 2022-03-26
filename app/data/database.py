@@ -22,9 +22,10 @@ class Database:
 
     def get_member(self, user_id: int) -> Member:
         self.cur.execute('SELECT * FROM members WHERE user_id = ?', (user_id,))
-        if self.cur.fetchone() is None:
+        res = self.cur.fetchone()
+        if not res:
             return None
-        return Member(self.cur.fetchone(), self.editor)
+        return Member(res, self.editor)
     
     def search_members(self, field, value):
         self.cur.execute(f'SELECT * FROM members WHERE {field} = ?', (value,))
@@ -40,9 +41,10 @@ class Database:
     
     def get_application(self, application_id: int) -> Application:
         self.cur.execute('SELECT * FROM applications WHERE application_id = ?', (application_id,))
-        if self.cur.fetchone() is None:
+        res = self.cur.fetchone()
+        if not res:
             return None
-        return Application(self.cur.fetchone(), self.editor)
+        return Application(res, self.editor)
     
     def search_applications(self, field, value):
         self.cur.execute(f'SELECT * FROM applications WHERE {field} = ?', (value,))
