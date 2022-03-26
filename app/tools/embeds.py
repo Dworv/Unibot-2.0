@@ -8,9 +8,9 @@ def build_embed(message, **infos):
             title=message,
             color=const.METADATA['color'],
             fields = [
-                inter.EmbedField(name=info[0], value=info[1], inline=True)
+                inter.EmbedField(name=info[0].replace('_', ' '), value=str(info[1]), inline=True)
                 for info in list(infos.items())
-            ]
+            ] 
         )
     else:
         return inter.Embed(

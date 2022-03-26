@@ -9,6 +9,7 @@ import validators.url
 import const
 from checks import can_apply
 from tools import build_embed
+from data import Application
 
 class Apply(EnhancedExtension):
     """An extension dedicated to /apply."""
@@ -23,26 +24,24 @@ class Apply(EnhancedExtension):
         """Apply to become a member of the Universe Editing Team"""
         
         # check if allowed to apply
-        applications = self.client.database.search_applications('applicant_id', int(ctx.author.id))
+        applications: Application = self.client.database.search_applications('applicant_id', int(ctx.author.id))
         for application in applications:
             if int(time()) - 604800 < application.date:
                 await ctx.send(embeds=build_embed(
                     f'You have already applied within the last week. You can apply again <t:{application.date + 604800}:R>',
-                    infos = {
-                        'Last Date': f'<f:{application.date}:F',
-                        'Last App': application.url
-                    }
+                    Last_Application_Data=f'<t:{application.date}:F>',
+                    Previous_Application=application.url
                 ))
                 return
 
         # check if url is valid
-        if not validators.url.url(url):
-            await ctx.send(embeds=build_embed('The url you used appeaars to be invalid. Please use a valid url.'))
+        if not validators.url(url):
+            await ctx.send(embeds=build_embed('The link you used appeaars to be invalid. Please use a valid url.'))
             return
 
         # send to reviewing channel
         # TODO: change to bot.get
-        reviewing_channel = inter.Channel(**self.client._http.get_channel(const.METADATA['channel']['reviewing']))
+        reviewing_channel = inter.Channel(**await self.client._http.get_channel(const.METADATA['channel']['reviewing']))
         reviewing_channel._client = self.client._http
 
         has_trail = const.METADATA['role']['trial'] in ctx.author.roles
@@ -51,11 +50,9 @@ class Apply(EnhancedExtension):
             url, 
             embeds=build_embed(
                 'New Application!',
-                infos = {
-                    'Rank:': 'Trial' if has_trail else 'None',
-                    'URL': url,
-                    'User': ctx.author.mention
-                }
+                Rank='Trial' if has_trail else 'None',
+                URL=url,
+                User=ctx.author.mention
             ),
             components=[# TODO: MAKE REVIEW SELECT MENU BY PUTTING NEW RANK IN CUSTOM_ID
                 inter.Button(
