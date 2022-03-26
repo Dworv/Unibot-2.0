@@ -2,12 +2,13 @@
 import interactions as inter
 
 def build_review_modal(
+    application_id: int,
     applicant: inter.Member,
     rank: str,
 ):
     new_role_options = '"Trial", "Member"' if rank == 'None' else '"Member'
     return inter.Modal(
-        custom_id='review_modal',
+        custom_id=f'review_modal:{application_id}',
         title=f'Review from {applicant.user.username} (Current Rank: {rank})',
         components=[
             inter.TextInput(
