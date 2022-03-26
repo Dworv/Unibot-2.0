@@ -28,7 +28,7 @@ class Apply(EnhancedExtension):
         for application in applications:
             if int(time()) - 604800 < application.date:
                 await ctx.send(embeds=build_embed(
-                    f'You have already applied within the last week. You can apply again <t:{application.date + 604800}:R>',
+                    f'Only one app per week. You can apply again <t:{application.date + 604800}:R>',
                     Last_Application_Data=f'<t:{application.date}:F>',
                     Previous_Application=application.url
                 ))

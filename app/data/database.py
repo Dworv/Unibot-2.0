@@ -50,4 +50,5 @@ class Database:
 
     class application_fields:
         applicant_id = 'applicant_id'
+        review_msg_id = 'review_msg_id'
         status = 'status'
