@@ -15,7 +15,7 @@ def build_review_modal(
                 custom_id='result',
                 style=inter.TextStyleType.SHORT, # TODO: change to select menu when added
                 label='Result:',
-                placeholder=f'Type the new role ({new_role_options}) or "Reapp".',
+                placeholder=f'Type the new role {new_role_options} or "Reapp".',
                 min_length=5,
                 max_length=6,
                 required=True

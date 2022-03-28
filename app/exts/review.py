@@ -5,6 +5,7 @@ from interactions.ext.checks import check
 
 import const
 from tools import build_embed, build_review_modal
+from data import Application, Member
 
 class Review(EnhancedExtension):
     
@@ -34,9 +35,25 @@ class Review(EnhancedExtension):
     @extension_modal('review_modal', startswith=True)
     async def review_modal(self, ctx: inter.CommandContext):
         app_id = ctx.data.custom_id.split(':')[1]
-        print(app_id)
-        application = self.client.database.get_application(int(app_id))
-        await ctx.send(str(application))
+        application: Application = self.client.database.get_application(int(app_id))
+        applicant: Member = self.client.database.get_member(int(application.applicant_id))
+        applicant_discord = inter.Member(**await self.client._http.get_member(const.METADATA['guild'], application.applicant_id))
+        new_rank, pros, procons, cons = [x['components'][0]['value'] for x in ctx.data.components]
+
+        if new_rank not in ['Reapp', 'Trial', 'Member']:
+            await ctx.send(embeds=build_embed('The rank you used was not valid. Use "Reapp", "Trial" or "Member"'))
+            return
+
+        if const.METADATA['role']['trial'] in applicant_discord.roles:
+            
+            
+
+        # get status
+        if applicant:
+
+        # update app in database
+        application.update_status()
+        
 
 
 def setup(bot):
