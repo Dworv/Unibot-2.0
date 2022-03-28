@@ -14,7 +14,7 @@ class Info(enhanced.EnhancedExtension):
         embed = inter.Embed(
             title="UniBot 2.0",
             description="UniBot is a discord bot written in python using the `interactions.py` library.",
-            color=const.DATA['color'],
+            color=const.METADATA['color'],
             fields=[
                 inter.EmbedField(
                     name='Development Start',

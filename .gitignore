@@ -1,6 +1,9 @@
 # Extra Stuff
 *.code-workspace
 const.py
+*.db*
+.DS_Store
+dbtest.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
