@@ -1,14 +1,15 @@
-
-members_create = '''
+members_create = """
 CREATE TABLE IF NOT EXISTS "members" (
 	"user_id"	INTEGER NOT NULL,
 	"rank"	TEXT NOT NULL,
 	"name"	TEXT NOT NULL,
 	"youtube"	TEXT
 )
-'''.removeprefix('\n')
+""".removeprefix(
+    "\n"
+)
 
-applications_create = '''
+applications_create = """
 CREATE TABLE IF NOT EXISTS "applications" (
 	"application_id"	INTEGER NOT NULL,
 	"applicant_id"	INTEGER NOT NULL,
@@ -18,4 +19,6 @@ CREATE TABLE IF NOT EXISTS "applications" (
 	"date"	INTEGER NOT NULL,
 	PRIMARY KEY("application_id" AUTOINCREMENT)
 )
-'''.removeprefix('\n')
+""".removeprefix(
+    "\n"
+)

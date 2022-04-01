@@ -1,45 +1,45 @@
-
 import interactions as inter
+
 
 def build_review_modal(
     application_id: int,
     applicant: inter.Member,
     rank: str,
 ):
-    new_role_options = '"Trial", "Member"' if rank == 'None' else '"Member'
+    new_role_options = '"Trial", "Member"' if rank == "None" else '"Member'
     return inter.Modal(
-        custom_id=f'review_modal:{application_id}',
-        title=f'Review from {applicant.user.username} (Current Rank: {rank})',
+        custom_id=f"review_modal:{application_id}",
+        title=f"Review from {applicant.user.username} (Current Rank: {rank})",
         components=[
             inter.TextInput(
-                custom_id='result',
-                style=inter.TextStyleType.SHORT, # TODO: change to select menu when added
-                label='Result:',
+                custom_id="result",
+                style=inter.TextStyleType.SHORT,  # TODO: change to select menu when added
+                label="Result:",
                 placeholder=f'Type the new role {new_role_options} or "Reapp".',
                 min_length=5,
                 max_length=6,
-                required=True
+                required=True,
             ),
             inter.TextInput(
-                custom_id='pros',
+                custom_id="pros",
                 style=inter.TextStyleType.PARAGRAPH,
-                label='+',
-                placeholder='Seperate with new lines',
-                required=False
+                label="+",
+                placeholder="Seperate with new lines",
+                required=False,
             ),
             inter.TextInput(
-                custom_id='procons',
+                custom_id="procons",
                 style=inter.TextStyleType.PARAGRAPH,
-                label='+-',
-                placeholder='Example line: Repetitive flow, velo is lacking impact, unoriginal song + atmos',
-                required=False
+                label="+-",
+                placeholder="Example line: Repetitive flow, velo is lacking impact, unoriginal song + atmos",
+                required=False,
             ),
             inter.TextInput(
-                custom_id='cons',
+                custom_id="cons",
                 style=inter.TextStyleType.PARAGRAPH,
-                label='-',
-                placeholder='Please try not to write anything bigger than this text in one single line.',
-                required=False
+                label="-",
+                placeholder="Please try not to write anything bigger than this text in one single line.",
+                required=False,
             ),
-        ]
+        ],
     )

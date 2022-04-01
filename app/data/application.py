@@ -1,5 +1,5 @@
-
 from .editor import Editor
+
 
 class Application:
     def __init__(self, data: list, editor: Editor):
@@ -11,7 +11,7 @@ class Application:
         self.date: int = int(data[5])
 
         self._editor = editor
-    
+
     def update_status(self, status: int):
-        self._editor.edit_application(self.application_id, 'status', status)
+        self._editor.edit_application(self.application_id, "status", status)
         self.status = status
