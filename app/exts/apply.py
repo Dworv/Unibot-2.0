@@ -40,9 +40,10 @@ class Apply(EnhancedExtension):
             return
 
         # send to reviewing channel
-        # TODO: change to bot.get
-        reviewing_channel = inter.Channel(**await self.client._http.get_channel(const.METADATA['channel']['reviewing']))
-        reviewing_channel._client = self.client._http
+        reviewing_channel = self.client.get(
+            inter.Channel, 
+            channel_id=const.METADATA['channel']['reviewing']
+        )
 
         has_trail = const.METADATA['role']['trial'] in ctx.author.roles
 
