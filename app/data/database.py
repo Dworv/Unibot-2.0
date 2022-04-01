@@ -58,7 +58,8 @@ class Database:
         self.cur.execute(f"SELECT * FROM applications WHERE {field} = ?", (value,))
         return [Application(data, self.editor) for data in self.cur.fetchall()]
 
-    class application_fields:
+    class ApplicationFields:
         applicant_id = "applicant_id"
         review_msg_id = "review_msg_id"
         status = "status"
+        reviewer_id = "reviewer_id"
